@@ -1,4 +1,4 @@
-# LTGameNote
+# LTGameSdkNote
 ### 支付流程说明
 
     为了保证支付的安全，sdk采用了Android支付平台（Google Play和OneStore）验证和LT服务器验证两种方式，业务流程图如下：
