@@ -787,7 +787,7 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
 
 __注意:facebook_app_id为facebook平台申请的appID，fb_login_protocol_scheme为facebook平台申请的scheme__
 ​      4）、在app.build中配置appID和scheme
-![facebook登录配置.png](https://upload-images.jianshu.io/upload_images/1716569-fa7aa760dfa8f33b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 
 + 2、参数说明
 
