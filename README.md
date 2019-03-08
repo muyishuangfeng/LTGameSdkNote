@@ -141,8 +141,8 @@ __3、支付结果回调参数说明__
 
   + 3、在所使用的moule的 app.build中添加项目引用
 
-         implementation 'com.github.muyishuangfeng:LTGameSdkGoogle:1.0.1'
-![Google登录和支付.png](https://upload-images.jianshu.io/upload_images/1716569-a40ca8301ba870b6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+         implementation 'com.github.muyishuangfeng:LTGameSdkGoogle:1.0.2'
+
 
 
 
@@ -383,8 +383,8 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
 
 3、在所使用的moule的 app.build中添加项目引用
 
-    implementation 'com.github.muyishuangfeng:LTGameSdkOneStore:1.0.2'
-![OneStore支付.png](https://upload-images.jianshu.io/upload_images/1716569-6873736218b409b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+    implementation 'com.github.muyishuangfeng:LTGameSdkOneStore:1.0.3'
+
 
 
 
@@ -557,9 +557,9 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
 
 + 2、在需要QQ登录的项目的配置文件（app.build）中添加引用
 
-       implementation 'com.github.muyishuangfeng:LTGameSdkQQ:1.0.1'
+       implementation 'com.github.muyishuangfeng:LTGameSdkQQ:1.0.2'
 
-![QQ登录.png](https://upload-images.jianshu.io/upload_images/1716569-9af53226bc643337.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 
 
 + 3、在项目的配置文件中（app.build）配置QQ的appID，如下图所示
@@ -672,7 +672,7 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
     //用以回调微信登录返回信息
       implementation 'org.greenrobot:eventbus:3.1.1'
       implementation 'com.github.muyishuangfeng:LTGameSdkWeChat:1.0.1'
-![微信.png](https://upload-images.jianshu.io/upload_images/1716569-ede8a4c6c0c0536f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 
 
 
@@ -756,12 +756,9 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
 ![4](https://upload-images.jianshu.io/upload_images/1716569-84f44d0667d0283a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
        2）、在项目的app.build中引用facebook的网络包如下所示
 
-     implementation 'com.github.muyishuangfeng:LTGameSdkFaceBook:1.0.1'
+     implementation 'com.github.muyishuangfeng:LTGameSdkFaceBook:1.0.2'
 
-![facebook登录.png](https://upload-images.jianshu.io/upload_images/1716569-f55a4eb8e0a599cb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-
-      3）、在项目的清单文件（Manifest）中配置
+   3）、在项目的清单文件（Manifest）中配置
      
          <!-- facebook登录 -->
         <meta-data
@@ -892,8 +889,8 @@ __注意:facebook_app_id为facebook平台申请的appID，fb_login_protocol_sche
 ![4](https://upload-images.jianshu.io/upload_images/1716569-84f44d0667d0283a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
        2）、在项目的app.build中引用google的网络包如下所示：
 
-        implementation 'com.github.muyishuangfeng:LTGameSdkGoogle:1.0.1'
-![Google登录和支付.png](https://upload-images.jianshu.io/upload_images/1716569-832896028f6085a9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+        implementation 'com.github.muyishuangfeng:LTGameSdkGoogle:1.0.2'
+
 
 
 __注意: 如果之前接入了Google Play支付不可重复配置__
@@ -1053,8 +1050,8 @@ __注意: 如果之前接入了Google Play支付不可重复配置__
   ![4](https://upload-images.jianshu.io/upload_images/1716569-84f44d0667d0283a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
      2）、在项目的app.build中引用UI的网络包如下所示：
 
-       implementation 'com.github.muyishuangfeng:LTGameSdkUI:1.0.3'
-![UI.png](https://upload-images.jianshu.io/upload_images/1716569-bf41f91595c8dc3a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+       implementation 'com.github.muyishuangfeng:LTGameSdkUI:1.0.4'
+
 
 
 
