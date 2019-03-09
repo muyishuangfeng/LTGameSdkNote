@@ -1050,7 +1050,7 @@ __注意: 如果之前接入了Google Play支付不可重复配置__
   ![4](https://upload-images.jianshu.io/upload_images/1716569-84f44d0667d0283a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
      2）、在项目的app.build中引用UI的网络包如下所示：
 
-       implementation 'com.github.muyishuangfeng:LTGameSdkUI:1.0.4'
+       implementation 'com.github.muyishuangfeng:LTGameSdkUI:1.0.5'
 
 
 
@@ -1094,21 +1094,23 @@ __注意: 如果之前接入了Google Play支付不可重复配置__
      3、接收方法
       @Subscribe
 
-    protected void receiveEvent(Event event){
-        switch (event.getCode()){
-            case BaseResult.MSG_RESULT_JUMP_INTO_GAME:{
-                Log.e("Mian","jumpIn");
-                break;
-            }
-            case BaseResult.MSG_RESULT_GOOGLE_SUCCESS:{
-                ResultData mData=(ResultData)event.getData();
+      @Subscribe
+    public void receiveEvent(Event event) {
+        switch (event.getCode()) {
+            case BaseResult.MSG_RESULT_JUMP_INTO_GAME: {
                 
                 break;
             }
-             case BaseResult.MSG_RESULT_FACEBOOK_SUCCESS:{
-                ResultData mData=(ResultData)event.getData();
-                
+            case BaseResult.MSG_RESULT_GOOGLE_SUCCESS: {
+                ResultData mData = (ResultData) event.getData();
+
+                break;
+            }
+            case BaseResult.MSG_RESULT_FACEBOOK_SUCCESS: {
+                ResultData mData = (ResultData) event.getData();
+
                 break;
             }
         }
+    
     }
