@@ -28,6 +28,7 @@ __1、初始化参数说明__
 |LTAppKey|String|是|每个应用对应的appKey|
 |publicKey|String|是|Google Play 生成的公钥|
 |packageId|String|是|每个应用的包名|
+|gid|String|是|服务器配置的id|
 |custom|Map<String,Object>|是|游戏上自定义数据，可以包含充值的区服等信息|
 |OnGoogleInitListener|Interface|是|初始化接口回调接口|
 
@@ -141,7 +142,7 @@ __3、支付结果回调参数说明__
 
   + 3、在所使用的moule的 app.build中添加项目引用
 
-         implementation 'com.github.muyishuangfeng:LTGameSdkGoogle:1.0.2'
+         implementation 'com.github.muyishuangfeng:LTGameSdkGooglePlay:1.0.1'
 
 
 
