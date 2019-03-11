@@ -155,7 +155,7 @@ __3、支付结果回调参数说明__
      ​      params.put("xx", "xx");
      ​      GooglePlayManager.initGooglePay(this, "公钥",
      ​            LTAppID, LTAppKey,
-     ​           packageId, params,
+     ​           packageId, gid,params,
      ​           new OnGoogleInitListener() {
      ​               @Override
      ​               public void onGoogleInitSuccess(String success) {
@@ -265,6 +265,7 @@ __参数说明__
 |LT-AppID|String|是|每个应用对应的appid|
 |LTAppKey|String|是|每个应用对应的appKey|
 |packageId|String|是|在OneStore配置的包名|
+|gid|String|是|服务配置的商品ID|
 |params|Map<String,Object>|是|游戏上自定义数据，可以包含充值的区服等信息|
 |onOneStoreSupportListener|Interface|是|是否支持oneStore支付的接口回调|
 |onOneStoreUploadListener|Interface|是|上传到服务器验证订单的接口回调|
@@ -384,7 +385,7 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
 
 3、在所使用的moule的 app.build中添加项目引用
 
-    implementation 'com.github.muyishuangfeng:LTGameSdkOneStore:1.0.3'
+    implementation 'com.github.muyishuangfeng:LTGameSdkOneStore:1.0.4'
 
 
 
@@ -397,7 +398,7 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
         params.put("xxx", "xxxx");
         OneStorePayManager.getInstance(this,公钥)
                 .initOneStore(this, LTAppID,
-                        LTAppKey, 在OneStore配置的包名, params, new 
+                        LTAppKey, 在OneStore配置的包名,gid, params, new 
                  onOneStoreSupportListener() {
                             @Override
                             public void onOneStoreClientFailed(String failedMsg) {
