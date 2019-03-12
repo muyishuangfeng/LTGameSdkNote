@@ -77,26 +77,22 @@ __3、支付结果回调参数说明__
          void onGoogleInitFailed(String result);
 
   +2、OnGooglePayResultListener 支付结果回调接口
-
         /**
          * 支付成功
          *
          * @param result 成功信息
         */
        void onPaySuccess(String result);
-    
       /**
        * 支付失败
        *
        * @param ex 失败信息
        */
       void onPayFailed(Throwable ex);
-    
       /**
        * 支付完成
        */
       void onPayComplete();
-    
       /**
        * 支付错误
        *
@@ -123,7 +119,6 @@ __3、支付结果回调参数说明__
         **/
        
        void onResultError(Throwable ex);
-       
         /**
         * Google play 返回信息（失败）
         *
