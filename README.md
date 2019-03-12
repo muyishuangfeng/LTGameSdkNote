@@ -76,24 +76,30 @@ __3、支付结果回调参数说明__
           */
          void onGoogleInitFailed(String result);
 
-  +2、OnGooglePayResultListener 支付结果回调接口
-        /**
-         * 支付成功
-         *
-         * @param result 成功信息
-        */
-       void onPaySuccess(String result);
+ + 2、OnGooglePayResultListener 
+支付结果回调接口
+
       /**
-       * 支付失败
+       * 支付成功 
        *
-       * @param ex 失败信息
+       * @param result 成功信息
        */
+
+      void onPaySuccess(String result); 
+
+
+       /**
+        * 支付失败
+        *
+        * @param result 失败信息 
+        */
+
       void onPayFailed(Throwable ex);
       /**
-       * 支付完成
-       */
+        * 支付完成
+        *
+        */
       void onPayComplete();
-      
 
       /**
        * 支付错误
@@ -102,32 +108,29 @@ __3、支付结果回调参数说明__
        */
       void onPayError(String result);
 
-  + 3、OnGoogleResultListener Google Play 服务器返回信息
++ 3、OnGoogleResultListener Google Play 服务器返回信息
 
+      /**
+       * Google play 返回信息（成功）
+       * 
+       * @param result 成功信息
+       */ 
+      void onResultSuccess(String result);
 
-       /**
-        * Google play 返回信息（成功）
+       /** 
+        * 上传到服务器错误 
         *
-        * @param result 成功信息
+        * @param ex 错误信息 
         */
-       void onResultSuccess(String result);
-    
-    
-       
-       /**
-        * 上传到服务器错误
-        *
-        * @param ex 错误信息
-        **/
-       
-       void onResultError(Throwable ex);
-        /**
-        * Google play 返回信息（失败）
-        *
-        * @param failedMsg 失败内容
-        **/
-    
-      void onResultFailed(String failedMsg);
+
+      void onResultError(Throwable ex);
+      /** 
+       * Google play 返回信息（失败）
+       * 
+       * @param failedMsg 失败内容 
+       */
+
+       void onResultFailed(String failedMsg);
 
 #### Google Play 支付接入（Android studio）
 
