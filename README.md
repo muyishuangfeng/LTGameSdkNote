@@ -178,7 +178,7 @@ __3、支付结果回调参数说明__
                 oldSkus.add("xxx");
                 oldSkus.add("xxx");
                 oldSkus.add("xxx");
-                GooglePlayManager.checkUnConsume(
+                GooglePlayManager.getRecharge(
                         this, LTAppID,LTAppKey,packageName,gid,params, selfRequestCode,
                         oldSkus, productID, new OnGooglePayResultListener() {
                             @Override
