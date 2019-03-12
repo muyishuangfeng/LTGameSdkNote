@@ -114,18 +114,22 @@ __3、支付结果回调参数说明__
         */
        void onResultSuccess(String result);
     
-      /**
-       * 上传到服务器错误
-       *
-       * @param ex 错误信息
-       */
-      void onResultError(Throwable ex);
     
-      /**
-       * Google play 返回信息（失败）
-       *
-       * @param failedMsg 失败内容
-       */
+       
+       /**
+        * 上传到服务器错误
+        *
+        * @param ex 错误信息
+        **/
+       
+       void onResultError(Throwable ex);
+       
+        /**
+        * Google play 返回信息（失败）
+        *
+        * @param failedMsg 失败内容
+        **/
+    
       void onResultFailed(String failedMsg);
 
 #### Google Play 支付接入（Android studio）
@@ -147,15 +151,15 @@ __3、支付结果回调参数说明__
 
 
 
- + 4、在需要调用google play支付的Activity或者Fragment中调用__初始化__、__支付__和__支付回调__的方法
+ + 4、在需要调用google play支付的Activity或者Fragment中调用 __初始化__、__支付和__支付回调__的方法
 
         1、初始化方法
-     ​      GooglePlayManager.initGooglePay(this, "公钥",
-     ​           new OnGoogleInitListener() {
-     ​               @Override
-     ​               public void onGoogleInitSuccess(String success) {
-     ​                   Log.e(TAG, success);
-     ​               }
+           GooglePlayManager.initGooglePay(this, "公钥",
+                new OnGoogleInitListener() {
+                    @Override
+                    public void onGoogleInitSuccess(String success) {
+                        Log.e(TAG, success);
+                    }
 
                     @Override
                     public void onGoogleInitFailed(String result) {
