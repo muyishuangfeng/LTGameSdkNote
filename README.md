@@ -24,19 +24,19 @@ __1、初始化参数说明__
 |参数|类型|是否必须|说明|
 |:------:|:------:|:-----:|:------|
 |context| Context|是|上下文|
-|LT-AppID|String|是|每个应用对应的appid|
-|LTAppKey|String|是|每个应用对应的appKey|
 |publicKey|String|是|Google Play 生成的公钥|
-|packageId|String|是|每个应用的包名|
-|gid|String|是|服务器配置的id|
-|custom|Map<String,Object>|是|游戏上自定义数据，可以包含充值的区服等信息|
-|OnGoogleInitListener|Interface|是|初始化接口回调接口|
+|OnGoogleInitListener|Interface|是|初始化接口Google回调接口|
 
 __2、支付请求参数说明__
 
 |参数|类型|是否必须|说明|
 |:-------:|:-------:|:-------:|:-----:|
 |context| Context|是|上下文|
+|LT-AppID|String|是|每个应用对应的appid|
+|LTAppKey|String|是|每个应用对应的appKey|
+|packageId|String|是|每个应用的包名|
+|gid|String|是|服务器配置的id|
+|custom|Map<String,Object>|是|游戏上自定义数据，可以包含充值的区服等信息|
 |requestCode|String|是|支付请求码|
 |goodsList|List<String>|是|内购商品集合|
 |productID|String|是|内购商品唯一ID|
@@ -142,7 +142,7 @@ __3、支付结果回调参数说明__
 
   + 3、在所使用的moule的 app.build中添加项目引用
 
-         implementation 'com.github.muyishuangfeng:LTGameSdkGooglePlay:1.0.1'
+         implementation 'com.github.muyishuangfeng:LTGameSdkGooglePlay:1.0.2'
 
 
 
@@ -150,12 +150,7 @@ __3、支付结果回调参数说明__
  + 4、在需要调用google play支付的Activity或者Fragment中调用__初始化__、__支付__和__支付回调__的方法
 
         1、初始化方法
-     ​      Map<String, Object> params = new WeakHashMap<>();
-     ​      params.put("xx", "xx");
-     ​      params.put("xx", "xx");
      ​      GooglePlayManager.initGooglePay(this, "公钥",
-     ​            LTAppID, LTAppKey,
-     ​           packageId, gid,params,
      ​           new OnGoogleInitListener() {
      ​               @Override
      ​               public void onGoogleInitSuccess(String success) {
@@ -168,13 +163,17 @@ __3、支付结果回调参数说明__
                     }
                 });
          2、支付方法
+         
+                 Map<String, Object> params = new WeakHashMap<>();
+                 params.put("xx", "xx");
+                 params.put("xx", "xx");
                 //所有内购商品集合（在Google Play Console中配置的商品）
                 List<String> oldSkus = new ArrayList<>();
                 oldSkus.add("xxx");
                 oldSkus.add("xxx");
                 oldSkus.add("xxx");
                 GooglePlayManager.checkUnConsume(
-                        this, selfRequestCode,
+                        this, LTAppID,LTAppKey,packageName,gid,params, selfRequestCode,
                         oldSkus, productID, new OnGooglePayResultListener() {
                             @Override
                             public void onPaySuccess(String result) {
