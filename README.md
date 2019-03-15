@@ -1057,7 +1057,7 @@ __注意: 如果之前接入了Google Play支付不可重复配置__
   ![4](https://upload-images.jianshu.io/upload_images/1716569-84f44d0667d0283a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
      2）、在项目的app.build中引用UI的网络包如下所示：
 
-       implementation 'com.github.muyishuangfeng:LTGameSdkUI:1.0.9'
+       implementation 'com.github.muyishuangfeng:LTGameSdkUI:1.1.0'
 
 
 
@@ -1072,37 +1072,67 @@ __注意: 如果之前接入了Google Play支付不可重复配置__
 
 
 + 协议传递方法说明
-
-
-|参数|类型|是否必须|说明|
-|:------:|:------:|:-----:|:------|
-|mAgreementUrl| String|是|用户协议url|
-|mPrivacyUrl| String|是|隐私政策url|
-
-
-
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                Bundle bundle = new Bundle();
-                //用户协议url
-                bundle.putString("mAgreementUrl", "xxx");
-                //隐私协议url
-                bundle.putString("mPrivacyUrl", "xxx");
-                intent.putExtra("bundleData", bundle);
-                startActivity(intent);
-  + 点击进入游戏页面返回值
   
-     BaseResult.MSG_RESULT_JUMP_INTO_GAME//进入游戏回调
++ 1、登录方法
+
+  |参数|类型|是否必须|说明|
+  |:------:|:------:|:-----:|:------|
+  |activity| Context|是|上下文|
+  |mAgreementUrl| String|是|用户协议url|
+  |mPrivacyUrl| String|是|隐私政策url|
+  |googleClientID|String|是|google客户端ID|
+  |LTAppID|String|是|乐推AppID|
+  |LTAppKey|String|是|乐推AppKey|
+  |OnReLoginInListener|Interface|是|第二次登录数据回调接口|
+
++ 2、登出方法
+  |参数|类型|是否必须|说明|
+  |:------:|:------:|:-----:|:------|
+  |activity| Context|是|上下文|
+  |mAgreementUrl| String|是|用户协议url|
+  |mPrivacyUrl| String|是|隐私政策url|
+  |googleClientID|String|是|google客户端ID|
+  |LTAppID|String|是|乐推AppID|
+  |LTAppKey|String|是|乐推AppKey|
+
++ 3、接口说明
+
+      public interface OnReLoginInListener {
+         //第二次登录成功结果回调
+       void OnLoginResult(ResultData result);
+       }
+
+ 
++ 3、使用说明
+
+              //登录方法
+              LoginUIManager.getInstance().loginIn(MainActivity.this, mAgreementUrl,
+                      mPrivacyUrl, GoogleClientID, LTAppID, LTAppKey, new OnReLoginInListener() {
+                          @Override
+                          public void OnLoginResult(ResultData result) {
+
+                          }
+                      });
+               //登出方法
+               LoginUIManager.getInstance().loginOut(MainActivity.this, mAgreementUrl,
+                      mPrivacyUrl, GoogleClientID, LTAppID, LTAppKey);
+
+  
+  
+    
      
    + 使用方法
      1、在onCreate中注册
-     EventUtils.register(this);
+
+            EventUtils.register(this);
      2、在onStop或者onDestory方法中反注册
-     EventUtils.unregister(this);
+
+            EventUtils.unregister(this);
      3、接收方法
-      @Subscribe
+     
 
       @Subscribe
-    public void receiveEvent(Event event) {
+      public void receiveEvent(Event event) {
         switch (event.getCode()) {
             case BaseResult.MSG_RESULT_GOOGLE_SUCCESS: {//获取到信息后做登录等操作
                 ResultData mData = (ResultData) event.getData();
