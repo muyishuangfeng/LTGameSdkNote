@@ -148,7 +148,7 @@ __3、支付结果回调参数说明__
 
   + 3、在所使用的moule的 app.build中添加项目引用
 
-         implementation 'com.github.muyishuangfeng:LTGameSdkGooglePlay:1.0.5'
+         implementation 'com.github.muyishuangfeng:LTGameSdkGooglePlay:1.0.8'
 
 
 
@@ -156,7 +156,7 @@ __3、支付结果回调参数说明__
  + 4、在需要调用google play支付的Activity或者Fragment中调用 __初始化__、__支付和__支付回调__的方法
 
         1、初始化方法
-           GooglePlayManager.initGooglePay(this, "公钥",
+           GooglePlayManager.getInstance().initGooglePay(this, "公钥",
                 new OnGoogleInitListener() {
                     @Override
                     public void onGoogleInitSuccess(String success) {
@@ -178,9 +178,9 @@ __3、支付结果回调参数说明__
                 oldSkus.add("xxx");
                 oldSkus.add("xxx");
                 oldSkus.add("xxx");
-                GooglePlayManager.getRecharge(
-                        this, LTAppID,LTAppKey,packageName,gid,params, selfRequestCode,
-                        oldSkus, productID, new OnGooglePayResultListener() {
+                GooglePlayManager.getInstance().getRecharge(
+                        this, LTAppID,LTAppKey,packageName,gid,params,
+                        oldSkus, productID, selfRequestCode, new OnGooglePayResultListener() {
                             @Override
                             public void onPaySuccess(String result) {
                                 Log.e(TAG, result);
@@ -207,7 +207,7 @@ __3、支付结果回调参数说明__
             @Override
             protected void onActivityResult(int requestCode, int resultCode, Intent data) {
             super.onActivityResult(requestCode, resultCode, data);
-            GooglePlayManager.onActivityResult(requestCode,  data, selfRequestCode,
+            GooglePlayManager.getInstance().onActivityResult(requestCode,  data, selfRequestCode,
                 LTAppID, LTAppKey,
                 new OnGoogleResultListener() {
                     @Override
@@ -232,7 +232,7 @@ __3、支付结果回调参数说明__
          @Override
          protected void onDestroy() {
          super.onDestroy();
-         GooglePlayManager.release();
+         GooglePlayManager.getInstance().release();
        }
 
  + 5 、Google play 配置参考
@@ -1057,7 +1057,7 @@ __注意: 如果之前接入了Google Play支付不可重复配置__
   ![4](https://upload-images.jianshu.io/upload_images/1716569-84f44d0667d0283a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
      2）、在项目的app.build中引用UI的网络包如下所示：
 
-       implementation 'com.github.muyishuangfeng:LTGameSdkUI:1.0.8'
+       implementation 'com.github.muyishuangfeng:LTGameSdkUI:1.0.9'
 
 
 
