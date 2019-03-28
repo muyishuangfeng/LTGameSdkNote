@@ -148,7 +148,7 @@ __3、支付结果回调参数说明__
 
   + 3、在所使用的moule的 app.build中添加项目引用
 
-         implementation 'com.github.muyishuangfeng:LTGameSdkGooglePlay:1.0.8'
+         implementation 'com.github.muyishuangfeng:LTGameSdkGooglePlay:1.1.1'
 
 
 
