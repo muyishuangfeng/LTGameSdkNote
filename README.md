@@ -25,6 +25,8 @@ __1、初始化参数说明__
 |:------:|:------:|:-----:|:------|
 |context| Context|是|上下文|
 |publicKey|String|是|Google Play 生成的公钥|
+|productID|String|是|商品ID|
+|goodsList|List|是|商品集合|
 |OnGoogleInitListener|Interface|是|初始化接口Google回调接口|
 
 __2、支付请求参数说明__
@@ -34,8 +36,8 @@ __2、支付请求参数说明__
 |context| Context|是|上下文|
 |LT-AppID|String|是|每个应用对应的appid|
 |LTAppKey|String|是|每个应用对应的appKey|
-|packageId|String|是|每个应用的包名|
 |gid|String|是|服务器配置的id|
+|packageId|String|是|每个应用的包名|
 |custom|Map<String,Object>|是|游戏上自定义数据，可以包含充值的区服等信息|
 |requestCode|String|是|支付请求码|
 |goodsList|List<String>|是|内购商品集合|
@@ -49,10 +51,13 @@ __3、支付结果回调参数说明__
 |:-------:|:-------:|:-------:|:----:|
 |context| Context|是|上下文|
 |requestCode|int|是|对应onActivityResult方法中的requestCode|
+|resultCode|int|是|对应onAcitivityResult方法中的resultCode|
 |data|Intent|是|对应onActivityResult方法中的data|
 |selfRequestCode|int|是|自定义的请求码和支付请求中的requestCode保持一致|
 |LT-AppID|String|是|每个应用对应的appid|
 |LTAppKey|String|是|每个应用对应的appKey|
+|goodsList|List|是|商品集合|
+|productID|String|是|商品ID|
 |OnGoogleResultListener|Interface|是|支付结果回调接口|
 
 #### Google Play支付简介
@@ -148,7 +153,7 @@ __3、支付结果回调参数说明__
 
   + 3、在所使用的moule的 app.build中添加项目引用
 
-         implementation 'com.github.muyishuangfeng:LTGameSdkGooglePlay:1.1.1'
+         implementation 'com.github.muyishuangfeng:LTGameSdkGooglePlay:1.1.2'
 
 
 
@@ -156,73 +161,75 @@ __3、支付结果回调参数说明__
  + 4、在需要调用google play支付的Activity或者Fragment中调用 __初始化__、__支付和__支付回调__的方法
 
         1、初始化方法
-           GooglePlayManager.getInstance().initGooglePay(this, "公钥",
-                new OnGoogleInitListener() {
-                    @Override
-                    public void onGoogleInitSuccess(String success) {
-                        Log.e(TAG, success);
-                    }
+           GooglePlayManager.init(this, "公钥", 商品ID, 商品集合, new OnGoogleInitListener() {
+            @Override
+            public void onGoogleInitSuccess(String success) {
+                
+            }
 
-                    @Override
-                    public void onGoogleInitFailed(String result) {
-                        Log.e(TAG, result);
-                    }
-                });
+            @Override
+            public void onGoogleInitFailed(String result) {
+                
+            }
+        });
          2、支付方法
          
                  Map<String, Object> params = new WeakHashMap<>();
                  params.put("xx", "xx");
                  params.put("xx", "xx");
-                //所有内购商品集合（在Google Play Console中配置的商品）
+                //所有内购商品集合
                 List<String> oldSkus = new ArrayList<>();
                 oldSkus.add("xxx");
                 oldSkus.add("xxx");
                 oldSkus.add("xxx");
-                GooglePlayManager.getInstance().getRecharge(
-                        this, LTAppID,LTAppKey,packageName,gid,params,
-                        oldSkus, productID, selfRequestCode, new OnGooglePayResultListener() {
-                            @Override
-                            public void onPaySuccess(String result) {
-                                Log.e(TAG, result);
-                            }
-         
-                            @Override
-                            public void onPayFailed(Throwable ex) {
-         
-                            }
-         
-                            @Override
-                            public void onPayComplete() {
-         
-                            }
-         
-                            @Override
-                            public void onPayError(String result) {
-         
-                            }
-                        }
-                );
+                GooglePlayManager.recharge(this, LTAppID, LTAppKey, gid, packageName,
+                params, selfRequestCode, oldSkus, 商品ID,
+                new OnGooglePlayResultListener() {
+                    @Override
+                    public void onPlaySuccess(String result) {
+                        
+                    }
+
+                    @Override
+                    public void onPlayFailed(Throwable ex) {
+                        
+                    }
+
+                    @Override
+                    public void onPlayComplete() {
+                        
+                    }
+
+                    @Override
+                    public void onPlayError(String result) {
+                       
+                    }
+                });
           3、支付回调方法
             
             @Override
             protected void onActivityResult(int requestCode, int resultCode, Intent data) {
             super.onActivityResult(requestCode, resultCode, data);
-            GooglePlayManager.getInstance().onActivityResult(requestCode,  data, selfRequestCode,
-                LTAppID, LTAppKey,
-                new OnGoogleResultListener() {
-                    @Override
-                    public void onResultError(Throwable ex) {
-                        Log.e(TAG,ex.getMessage());
-                    }
-         
-                    @Override
-                    public void onResultFailed(String failedMsg) {
-                        Log.e(TAG,failedMsg);
-                    }
-         
+            //所有内购商品集合
+                List<String> oldSkus = new ArrayList<>();
+                oldSkus.add("xxx");
+                oldSkus.add("xxx");
+                oldSkus.add("xxx");
+            GooglePlayManager.onActivityResult(this, requestCode, resultCode, data, selfRequestCode,
+                LTAppID, LTAppKey, oldSkus, productID, new OnGoogleResultListener() {
                     @Override
                     public void onResultSuccess(String result) {
-                        Log.e(TAG,result);
+                        
+                    }
+
+                    @Override
+                    public void onResultError(Throwable ex) {
+                        
+                    }
+
+                    @Override
+                    public void onResultFailed(String failedMsg) {
+                       
                     }
                 });
         }
@@ -232,7 +239,7 @@ __3、支付结果回调参数说明__
          @Override
          protected void onDestroy() {
          super.onDestroy();
-         GooglePlayManager.getInstance().release();
+         GooglePlayManager.release();
        }
 
  + 5 、Google play 配置参考
@@ -763,7 +770,7 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
 ![4](https://upload-images.jianshu.io/upload_images/1716569-84f44d0667d0283a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
        2）、在项目的app.build中引用facebook的网络包如下所示
 
-     implementation 'com.github.muyishuangfeng:LTGameSdkFaceBook:1.0.2'
+     implementation 'com.github.muyishuangfeng:LTGameSdkFaceBook:1.0.3'
 
    3）、在项目的清单文件（Manifest）中配置
      
@@ -896,7 +903,7 @@ __注意:facebook_app_id为facebook平台申请的appID，fb_login_protocol_sche
 ![4](https://upload-images.jianshu.io/upload_images/1716569-84f44d0667d0283a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
        2）、在项目的app.build中引用google的网络包如下所示：
 
-        implementation 'com.github.muyishuangfeng:LTGameSdkGoogle:1.0.4'
+        implementation 'com.github.muyishuangfeng:LTGameSdkGoogle:1.0.6'
 
 
 
@@ -1057,7 +1064,7 @@ __注意: 如果之前接入了Google Play支付不可重复配置__
   ![4](https://upload-images.jianshu.io/upload_images/1716569-84f44d0667d0283a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
      2）、在项目的app.build中引用UI的网络包如下所示：
 
-       implementation 'com.github.muyishuangfeng:LTGameSdkUI:1.1.2'
+       implementation 'com.github.muyishuangfeng:LTGameSdkUI:1.1.3'
 
 
 
@@ -1150,3 +1157,22 @@ __注意: 如果之前接入了Google Play支付不可重复配置__
         }
     
     }
+
+
+====================================================================
+
+ __注意：兼容Android9.0 Http请求的网络请求方式__
+
+ + 1、在res目录下创建xml文件夹
+ + 2、在xml文件夹下创建network_security_config.xml文件夹
+  
+        <?xml version="1.0" encoding="utf-8"?>
+        <network-security-config>
+        <base-config cleartextTrafficPermitted="true" />
+        </network-security-config>
+ + 3、在清单文件（AndroidManifest）中的Application节点下配置引用
+       
+         <application
+          android:networkSecurityConfig="@xml/network_security_config"
+         />
+  
