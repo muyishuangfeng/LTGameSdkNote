@@ -274,24 +274,27 @@ __参数说明__
 |:-------:|:-------:|:-------:|:----:|
 |context| Context|是|上下文|
 |publicKey|String|是|OneStore平台分配的publicKey|
-|LT-AppID|String|是|每个应用对应的appid|
-|LTAppKey|String|是|每个应用对应的appKey|
-|packageId|String|是|在OneStore配置的包名|
-|gid|String|是|服务配置的商品ID|
-|params|Map<String,Object>|是|游戏上自定义数据，可以包含充值的区服等信息|
+|productType|String|是|商品类型（管理型商品(inapp), 包月自动支付商品(auto)）|
 |onOneStoreSupportListener|Interface|是|是否支持oneStore支付的接口回调|
-|onOneStoreUploadListener|Interface|是|上传到服务器验证订单的接口回调|
+
 
 + 2、支付（购买）参数说明
 
 |参数|类型|是否必须|说明|
 |:-------:|:-------:|:-------:|:----:|
 |context| Context|是|上下文|
+|LT-AppID|String|是|每个应用对应的appid|
+|LTAppKey|String|是|每个应用对应的appKey|
 |selfRequestCode|int|是|支付请求码|
 |productName|String|否|商品名称|
+|packageId|String|是|在OneStore配置的包名|
+|gid|String|是|服务配置的商品ID|
+|params|Map<String,Object>|是|游戏上自定义数据，可以包含充值的区服等信息|
 |productId|String|是|商品的唯一ID（在OneStore中配置的）|
+|productType|String|是|商品类型（管理型商品(inapp), 包月自动支付商品(auto)）|
+|onOneStoreUploadListener|Interface|是|更新oneStore客户端的接口回调|
 |onOneStoreSupportListener|Interface|是|是否支持oneStore的接口回调|
-
+|OnCreateOrderFailedListener|Interface|是|订单创建失败的接口回调|
 
 +3、支付（购买）结果回调参数说明
 
@@ -308,7 +311,7 @@ __参数说明__
 
 2、OneStorePayManager 封装类；
 
-3、OneStoreResult 回调状态类；
+
 
 3、 回调接口：
 
@@ -397,7 +400,7 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
 
 3、在所使用的moule的 app.build中添加项目引用
 
-    implementation 'com.github.muyishuangfeng:LTGameSdkOneStore:1.0.4'
+    implementation 'com.github.muyishuangfeng:LTGameSdkOneStore:1.0.5'
 
 
 
@@ -405,111 +408,121 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
  4、在需要调用OneStore支付的Activity或者Fragment中调用初始化、支付、支付回调和释放资源的方法
 
        1、初始化方法      
-        Map<String, Object> params = new WeakHashMap<>();
-        params.put("xx", "xxx");
-        params.put("xxx", "xxxx");
-        OneStorePayManager.getInstance(this,公钥)
-                .initOneStore(this, LTAppID,
-                        LTAppKey, 在OneStore配置的包名,gid, params, new 
-                 onOneStoreSupportListener() {
+        OneStorePlayManager
+                .initOneStore(this, PUBLIC_KEY, "inapp",
+                        new onOneStoreSupportListener() {
                             @Override
                             public void onOneStoreClientFailed(String failedMsg) {
                                 Log.e("oneStoreINIT", failedMsg);
                             }
-    
+
                             @Override
                             public void onOneStoreFailed(OneStoreResult result) {
                                 Log.e("oneStoreINIT", result.getCode() + "==" + result.getDescription());
                             }
-    
+
                             @Override
                             public void onOneStoreError(String result) {
                                 Log.e("oneStoreINIT", result);
                             }
-    
+
                             @Override
                             public void onOneStoreSuccess(OneStoreResult result) {
                                 Log.e("oneStoreINIT", result.getCode() + "==" + result.getDescription());
                             }
-    
+
                             @Override
                             public void onOneStoreConnected() {
                                 Log.e("oneStoreINIT", "onOneStoreConnected");
                             }
-    
+
                             @Override
                             public void onOneStoreDisConnected() {
                                 Log.e("oneStoreINIT", "onOneStoreDisConnected");
                             }
-                        },
-                        new OnCreateOrderFailedListener() {
-                            @Override
-                            public void onCreateOrderFailed(int failed) {
-    
-                            }
-    
-                            @Override
-                            public void onCreateOrderError(String errorMsg) {
-    
-                            }
-                        },new onOneStoreUploadListener() {
-                            @Override
-                            public void onOneStoreUploadSuccess(int result) {
-    
-                            }
-    
-                            @Override
-                            public void onOneStoreUploadFailed(Throwable error) {
-    
-                            }
+
                         });
     
               2、支付（购买）方法
-              OneStorePayManager.getInstance(
-                     OneStoreActivity.this,公钥)
-                     .buyProduct(上下文,
-                             自定义的请求码,
-                             商品名,
-                             商品ID,
-                             new onOneStoreSupportListener(){
-                                 @Override
-                                 public void onOneStoreClientFailed(String failedMsg) {
-                                     Log.e("oneStore",failedMsg);
-                                 }
-    
-                                 @Override
-                                 public void onOneStoreFailed(OneStoreResult result) {
-                                     Log.e("oneStore",result.getCode()+"=="+result.getDescription());
-                                 }
-    
-                                 @Override
-                                 public void onOneStoreError(String result) {
-                                     Log.e("oneStore",result);
-                                 }
-    
-                                 @Override
-                                 public void onOneStoreSuccess(OneStoreResult result) {
-                                     Log.e("oneStore",result.getCode()+"=="+result.getDescription());
-                                 }
-    
-                                 @Override
-                                 public void onOneStoreConnected() {
-                                     Log.e("oneStore","onOneStoreConnected");
-                                 }
-    
-                                 @Override
-                                 public void onOneStoreDisConnected() {
-                                     Log.e("oneStore","onOneStoreDisConnected");
-                                 }
-                             });
+               Map<String, Object> params = new WeakHashMap<>();
+                params.put("xx", "xx");
+                params.put("xx", "xx");
+
+                OneStorePlayManager
+                        .getProduct(OneStoreActivity.this,
+                                LTAppID,
+                                LTAppKey,
+                                selfRequestCode,
+                                productID,
+                                packageName,
+                                gid,
+                                params,
+                                productID,
+                                "inapp",
+                                new onOneStoreUploadListener() {
+                                    @Override
+                                    public void onOneStoreUploadSuccess(int result) {
+                                        Log.e("oneStore", result + "==onOneStoreUploadSuccess=");
+                                        if (result == 200) {
+                                            mTxtResult.setText("亲：你购买成功了");
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onOneStoreUploadFailed(Throwable error) {
+                                        Log.e("oneStore", error.getMessage());
+                                    }
+                                },
+                                new onOneStoreSupportListener() {
+                                    @Override
+                                    public void onOneStoreClientFailed(String failedMsg) {
+                                        Log.e("oneStore", failedMsg);
+                                    }
+
+                                    @Override
+                                    public void onOneStoreFailed(OneStoreResult result) {
+                                        Log.e("oneStore", result.getCode() + "==" + result.getDescription());
+                                    }
+
+                                    @Override
+                                    public void onOneStoreError(String result) {
+                                        Log.e("oneStore", result);
+                                    }
+
+                                    @Override
+                                    public void onOneStoreSuccess(OneStoreResult result) {
+                                        Log.e("oneStore", result.getCode() + "==" + result.getDescription());
+                                    }
+
+                                    @Override
+                                    public void onOneStoreConnected() {
+                                        Log.e("oneStore", "onOneStoreConnected");
+                                    }
+
+                                    @Override
+                                    public void onOneStoreDisConnected() {
+                                        Log.e("oneStore", "onOneStoreDisConnected");
+                                    }
+                                }, new OnCreateOrderFailedListener() {
+                                    @Override
+                                    public void onCreateOrderFailed(String failed) {
+                                        Log.e("oneStore", "=======onCreateOrderFailed========" + failed);
+                                    }
+
+                                    @Override
+                                    public void onCreateOrderError(String errorMsg) {
+                                        Log.e("oneStore", "=======onCreateOrderError========" + errorMsg);
+                                    }
+                                });
             }
         });
+
        
       3、支付回调
         @Override
         protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data)；
-       OneStorePayManager.getInstance(this,PUBLIC_KEY).onActivityResult(requestCode,
+       OneStorePayManager.onActivityResult(requestCode,
        resultCode,data, selfRequestCode);
        }
     4、释放资源
@@ -517,7 +530,7 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
         @Override
         protected void onDestroy() {
         super.onDestroy();
-        OneStorePayManager.getInstance(this, PUBLIC_KEY).release();
+        OneStorePayManager.release();
     }
 
 
@@ -525,6 +538,8 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
 + 5、参考配置
 [OneStore 配置参考](https://dev.onestore.co.kr/devpoc/reference/view/IAP_v17_cn)
 [OneStore github参考](https://github.com/ONE-store/iap_v5/tree/onestore_iap_sample)
+  
+
   
 #### 结果码
 
