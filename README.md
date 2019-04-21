@@ -153,7 +153,7 @@ __3、支付结果回调参数说明__
 
   + 3、在所使用的moule的 app.build中添加项目引用
 
-         implementation 'com.github.muyishuangfeng:LTGameSdkGooglePlay:1.1.4'
+         implementation 'com.github.muyishuangfeng:LTGameSdkGooglePlay:1.1.7'
 
 
 
@@ -400,7 +400,7 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
 
 3、在所使用的moule的 app.build中添加项目引用
 
-    implementation 'com.github.muyishuangfeng:LTGameSdkOneStore:1.0.6'
+    implementation 'com.github.muyishuangfeng:LTGameSdkOneStore:1.0.8'
 
 
 
@@ -586,7 +586,7 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
 
 + 2、在需要QQ登录的项目的配置文件（app.build）中添加引用
 
-       implementation 'com.github.muyishuangfeng:LTGameSdkQQ:1.0.2'
+       implementation 'com.github.muyishuangfeng:LTGameSdkQQ:1.0.3'
 
 
 
@@ -700,7 +700,7 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
 
     //用以回调微信登录返回信息
       implementation 'org.greenrobot:eventbus:3.1.1'
-      implementation 'com.github.muyishuangfeng:LTGameSdkWeChat:1.0.1'
+      implementation 'com.github.muyishuangfeng:LTGameSdkWeChat:1.0.3'
 
 
 
@@ -785,7 +785,7 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
 ![4](https://upload-images.jianshu.io/upload_images/1716569-84f44d0667d0283a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
        2）、在项目的app.build中引用facebook的网络包如下所示
 
-     implementation 'com.github.muyishuangfeng:LTGameSdkFaceBook:1.0.4'
+     implementation 'com.github.muyishuangfeng:LTGameSdkFaceBook:1.0.6'
 
    3）、在项目的清单文件（Manifest）中配置
      
@@ -918,7 +918,7 @@ __注意:facebook_app_id为facebook平台申请的appID，fb_login_protocol_sche
 ![4](https://upload-images.jianshu.io/upload_images/1716569-84f44d0667d0283a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
        2）、在项目的app.build中引用google的网络包如下所示：
 
-        implementation 'com.github.muyishuangfeng:LTGameSdkGoogle:1.0.7'
+        implementation 'com.github.muyishuangfeng:LTGameSdkGoogle:1.0.9'
 
 
 
@@ -1079,7 +1079,7 @@ __注意: 如果之前接入了Google Play支付不可重复配置__
   ![4](https://upload-images.jianshu.io/upload_images/1716569-84f44d0667d0283a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
      2）、在项目的app.build中引用UI的网络包如下所示：
 
-       implementation 'com.github.muyishuangfeng:LTGameSdkUI:1.1.5'
+       implementation 'com.github.muyishuangfeng:LTGameSdkUI:1.1.7'
 
 
 
