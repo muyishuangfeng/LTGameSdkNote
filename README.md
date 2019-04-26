@@ -402,7 +402,7 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
 
 3、在所使用的moule的 app.build中添加项目引用
 
-    implementation 'com.github.muyishuangfeng:LTGameSdkOneStore:1.0.8'
+    implementation 'com.github.muyishuangfeng:LTGameSdkOneStore:1.1.0'
 
 
 
