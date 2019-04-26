@@ -275,8 +275,10 @@ __参数说明__
 |context| Context|是|上下文|
 |publicKey|String|是|OneStore平台分配的publicKey|
 |productType|String|是|商品类型（管理型商品(inapp), 包月自动支付商品(auto)）|
+|LT-AppID|String|是|每个应用对应的appid|
+|LTAppKey|String|是|每个应用对应的appKey|
 |onOneStoreSupportListener|Interface|是|是否支持oneStore支付的接口回调|
-
+|onOneStoreUploadListener|Interface|是|在服务器验证订单的接口回调|
 
 + 2、支付（购买）参数说明
 
@@ -410,6 +412,7 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
        1、初始化方法      
         OneStorePlayManager
                 .initOneStore(this, PUBLIC_KEY, "inapp",
+                        "乐推appID","乐推appKey",
                         new onOneStoreSupportListener() {
                             @Override
                             public void onOneStoreClientFailed(String failedMsg) {
@@ -441,6 +444,16 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
                                 Log.e("oneStoreINIT", "onOneStoreDisConnected");
                             }
 
+                        }, new onOneStoreUploadListener() {
+                            @Override
+                            public void onOneStoreUploadSuccess(int result) {
+                                Log.e("oneStoreINIT",result+"");
+                            }
+
+                            @Override
+                            public void onOneStoreUploadFailed(Throwable error) {
+                                Log.e("oneStoreINIT",error.getMessage());
+                            }
                         });
     
               2、支付（购买）方法
