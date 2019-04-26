@@ -277,6 +277,7 @@ __参数说明__
 |productType|String|是|商品类型（管理型商品(inapp), 包月自动支付商品(auto)）|
 |LT-AppID|String|是|每个应用对应的appid|
 |LTAppKey|String|是|每个应用对应的appKey|
+|testID|int|是|是否在测试服（1是，0否）|
 |onOneStoreSupportListener|Interface|是|是否支持oneStore支付的接口回调|
 |onOneStoreUploadListener|Interface|是|在服务器验证订单的接口回调|
 
@@ -294,6 +295,7 @@ __参数说明__
 |params|Map<String,Object>|是|游戏上自定义数据，可以包含充值的区服等信息|
 |productId|String|是|商品的唯一ID（在OneStore中配置的）|
 |productType|String|是|商品类型（管理型商品(inapp), 包月自动支付商品(auto)）|
+|testID|int|是|是否在测试服（1是，0否）|
 |onOneStoreUploadListener|Interface|是|更新oneStore客户端的接口回调|
 |onOneStoreSupportListener|Interface|是|是否支持oneStore的接口回调|
 |OnCreateOrderFailedListener|Interface|是|订单创建失败的接口回调|
@@ -402,7 +404,7 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
 
 3、在所使用的moule的 app.build中添加项目引用
 
-    implementation 'com.github.muyishuangfeng:LTGameSdkOneStore:1.1.0'
+    implementation 'com.github.muyishuangfeng:LTGameSdkOneStore:1.1.2'
 
 
 
