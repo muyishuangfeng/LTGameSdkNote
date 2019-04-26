@@ -415,6 +415,7 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
         OneStorePlayManager
                 .initOneStore(this, PUBLIC_KEY, "inapp",
                         "乐推appID","乐推appKey",
+                        是否是测试服（1表示是测试服，0表示不是测试服）,
                         new onOneStoreSupportListener() {
                             @Override
                             public void onOneStoreClientFailed(String failedMsg) {
@@ -474,6 +475,7 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
                                 params,
                                 productID,
                                 "inapp",
+                                是否是测试服（1表示是测试服，0表示不是测试服）,
                                 new onOneStoreUploadListener() {
                                     @Override
                                     public void onOneStoreUploadSuccess(int result) {
