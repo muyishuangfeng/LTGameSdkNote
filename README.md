@@ -802,7 +802,7 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
 ![4](https://upload-images.jianshu.io/upload_images/1716569-84f44d0667d0283a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
        2）、在项目的app.build中引用facebook的网络包如下所示
 
-     implementation 'com.github.muyishuangfeng:LTGameSdkFaceBook:1.0.6'
+     implementation 'com.github.muyishuangfeng:LTGameSdkFaceBook:1.0.7'
 
    3）、在项目的清单文件（Manifest）中配置
      
@@ -935,7 +935,7 @@ __注意:facebook_app_id为facebook平台申请的appID，fb_login_protocol_sche
 ![4](https://upload-images.jianshu.io/upload_images/1716569-84f44d0667d0283a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
        2）、在项目的app.build中引用google的网络包如下所示：
 
-        implementation 'com.github.muyishuangfeng:LTGameSdkGoogle:1.0.9'
+        implementation 'com.github.muyishuangfeng:LTGameSdkGoogle:1.1.0'
 
 
 
@@ -1096,7 +1096,7 @@ __注意: 如果之前接入了Google Play支付不可重复配置__
   ![4](https://upload-images.jianshu.io/upload_images/1716569-84f44d0667d0283a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
      2）、在项目的app.build中引用UI的网络包如下所示：
 
-       implementation 'com.github.muyishuangfeng:LTGameSdkUI:1.1.7'
+       implementation 'com.github.muyishuangfeng:LTGameSdkUI:1.1.8'
 
 
 
