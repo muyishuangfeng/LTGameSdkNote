@@ -1191,7 +1191,7 @@ __注意: 如果之前接入了Google Play支付不可重复配置__
     }
     
     
-**注意:在登录之前首先调用一次缓存广告ID的方法**
+**注意:在登录之前首先调用一次缓存广告ID的方法(需要读取手机状态胡权限READ_PHONE_STATE)**
 
   LoginBackManager.getUUID(context) 
 
