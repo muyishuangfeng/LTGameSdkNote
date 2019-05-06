@@ -802,7 +802,7 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
 ![4](https://upload-images.jianshu.io/upload_images/1716569-84f44d0667d0283a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
        2）、在项目的app.build中引用facebook的网络包如下所示
 
-     implementation 'com.github.muyishuangfeng:LTGameSdkFaceBook:1.0.7'
+     implementation 'com.github.muyishuangfeng:LTGameSdkFaceBook:1.0.9'
 
    3）、在项目的清单文件（Manifest）中配置
      
@@ -839,6 +839,7 @@ __注意:facebook_app_id为facebook平台申请的appID，fb_login_protocol_sche
 |context| Context|是|上下文|
 |LT-AppID|String|是|每个应用对应的appid|
 |LTAppKey|String|是|每个应用对应的appKey|
+|mAdID|String|是|广告ID（获取方法看文档）|
 |OnLoginSuccessListener|Interface|是|登录回调接口|
 
 + 3、接口说明
@@ -884,7 +885,7 @@ __注意:facebook_app_id为facebook平台申请的appID，fb_login_protocol_sche
 
        1、初始化
        FaceBookLoginManager.getInstance().initFaceBook(this, 
-                "", "",
+                "", "",mADID,
                 new OnLoginSuccessListener() {
                     @Override
                     public void onSuccess(BaseEntry<ResultData> result) {
@@ -935,7 +936,7 @@ __注意:facebook_app_id为facebook平台申请的appID，fb_login_protocol_sche
 ![4](https://upload-images.jianshu.io/upload_images/1716569-84f44d0667d0283a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
        2）、在项目的app.build中引用google的网络包如下所示：
 
-        implementation 'com.github.muyishuangfeng:LTGameSdkGoogle:1.1.0'
+        implementation 'com.github.muyishuangfeng:LTGameSdkGoogle:1.1.2'
 
 
 
@@ -959,6 +960,7 @@ __注意: 如果之前接入了Google Play支付不可重复配置__
 |content|Context|是|上下文|
 |LT-AppID|String|是|每个应用对应的appid|
 |LTAppKey|String|是|每个应用对应的appKey|
+|mAdID|String|是|广告ID（获取方法看文档）|
 |OnLoginSuccessListener|Interface|是|登录回调接口|
 
 + 3、接口说明
@@ -1050,7 +1052,7 @@ __注意: 如果之前接入了Google Play支付不可重复配置__
         ​       
            2、回调方法
         ​    GooglePlayLoginManager.onActivityResult(requestCode, data, REQUEST_CODE,
-        ​    this,  LTAppID, LTAppKey,
+        ​    this,  LTAppID, LTAppKey,mADID,
         ​    new OnLoginSuccessListener() {
         ​        @Override
         ​        public void onSuccess(BaseEntry<ResultData> result) {
@@ -1096,7 +1098,7 @@ __注意: 如果之前接入了Google Play支付不可重复配置__
   ![4](https://upload-images.jianshu.io/upload_images/1716569-84f44d0667d0283a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
      2）、在项目的app.build中引用UI的网络包如下所示：
 
-       implementation 'com.github.muyishuangfeng:LTGameSdkUI:1.1.8'
+       implementation 'com.github.muyishuangfeng:LTGameSdkUI:1.1.9'
 
 
 
@@ -1122,6 +1124,7 @@ __注意: 如果之前接入了Google Play支付不可重复配置__
   |googleClientID|String|是|google客户端ID|
   |LTAppID|String|是|乐推AppID|
   |LTAppKey|String|是|乐推AppKey|
+  |mAdID|String|是|广告ID（获取方法看文档）|
   |OnReLoginInListener|Interface|是|第二次登录数据回调接口|
 
 + 2、登出方法
@@ -1134,6 +1137,7 @@ __注意: 如果之前接入了Google Play支付不可重复配置__
   |googleClientID|String|是|google客户端ID|
   |LTAppID|String|是|乐推AppID|
   |LTAppKey|String|是|乐推AppKey|
+  |mAdID|String|是|广告ID（获取方法看文档）|
 
 + 3、接口说明
 
@@ -1147,7 +1151,7 @@ __注意: 如果之前接入了Google Play支付不可重复配置__
 
               //登录方法
               LoginUIManager.getInstance().loginIn(MainActivity.this, mAgreementUrl,
-                      mPrivacyUrl, GoogleClientID, LTAppID, LTAppKey, new OnReLoginInListener() {
+                      mPrivacyUrl, GoogleClientID, LTAppID, LTAppKey,mADID, new OnReLoginInListener() {
                           @Override
                           public void OnLoginResult(ResultData result) {
 
@@ -1155,7 +1159,7 @@ __注意: 如果之前接入了Google Play支付不可重复配置__
                       });
                //登出方法
                LoginUIManager.getInstance().loginOut(MainActivity.this, mAgreementUrl,
-                      mPrivacyUrl, GoogleClientID, LTAppID, LTAppKey);
+                      mPrivacyUrl, GoogleClientID, LTAppID, LTAppKey,mADID);
 
   
   
@@ -1191,9 +1195,19 @@ __注意: 如果之前接入了Google Play支付不可重复配置__
     }
     
     
-**注意:在登录之前首先调用一次缓存广告ID的方法**
+**注意:广告ID必须写，获取广告ID的方法如下**
 
-  LoginBackManager.getUUID(context) 
+ Executors.newSingleThreadExecutor().execute(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                  String  mAdID = DeviceUtils.getGoogleAdId(Context上下文);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+  
 
 ====================================================================
 
