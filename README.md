@@ -295,8 +295,6 @@ __参数说明__
 |params|Map<String,Object>|是|游戏上自定义数据，可以包含充值的区服等信息|
 |productId|String|是|商品的唯一ID（在OneStore中配置的）|
 |productType|String|是|商品类型（管理型商品(inapp), 包月自动支付商品(auto)）|
-|testID|int|是|是否在测试服（1是，0否）|
-|onOneStoreUploadListener|Interface|是|更新oneStore客户端的接口回调|
 |onOneStoreSupportListener|Interface|是|是否支持oneStore的接口回调|
 |OnCreateOrderFailedListener|Interface|是|订单创建失败的接口回调|
 
@@ -304,10 +302,17 @@ __参数说明__
 
 |参数|类型|是否必须|说明|
 |:-------:|:-------:|:-------:|:----:|
+|context| Context|是|上下文|
+|LT-AppID|String|是|每个应用对应的appid|
+|LTAppKey|String|是|每个应用对应的appKey|
+|testID|int|是|是否在测试服（1是，0否）|
 |requestCode|int|是|onActivityResult对应的requestCode参数|
 |resultCode|int|是|onActivityResult对应的resultCode参数|
 |data|Intent|是|onActivityResult对应的data参数|
 |selfRequestCode|int|是|请求码（和支付的请求码对应起来）|
+|onOneStoreUploadListener|Interface|是|订单验证的接口回调|
+|onOneStoreSupportListener|Interface|是|是否支持oneStore的接口回调|
+
 
 #### OneStore支付简介
 
@@ -404,7 +409,7 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
 
 3、在所使用的moule的 app.build中添加项目引用
 
-    implementation 'com.github.muyishuangfeng:LTGameSdkOneStore:1.1.2'
+    implementation 'com.github.muyishuangfeng:LTGameSdkOneStore:1.1.3'
 
 
 
@@ -475,21 +480,6 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
                                 params,
                                 productID,
                                 "inapp",
-                                是否是测试服（1表示是测试服，0表示不是测试服）,
-                                new onOneStoreUploadListener() {
-                                    @Override
-                                    public void onOneStoreUploadSuccess(int result) {
-                                        Log.e("oneStore", result + "==onOneStoreUploadSuccess=");
-                                        if (result == 200) {
-                                            mTxtResult.setText("亲：你购买成功了");
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onOneStoreUploadFailed(Throwable error) {
-                                        Log.e("oneStore", error.getMessage());
-                                    }
-                                },
                                 new onOneStoreSupportListener() {
                                     @Override
                                     public void onOneStoreClientFailed(String failedMsg) {
@@ -539,8 +529,56 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
         @Override
         protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data)；
-       OneStorePayManager.onActivityResult(requestCode,
-       resultCode,data, selfRequestCode);
+       OneStorePlayManager.onActivityResult(this,
+                乐推APPID,
+                乐推APPKey,
+                是否是测试服（1表示是测试服，0表示不是测试服）,
+                requestCode,
+                resultCode,
+                data,
+                selfRequestCode,
+                new onOneStoreUploadListener() {
+                    @Override
+                    public void onOneStoreUploadSuccess(int result) {
+                    //重点在这里
+                        mTxtResult.setText(result+"====");
+                    }
+
+                    @Override
+                    public void onOneStoreUploadFailed(Throwable error) {
+
+                    }
+                }, new onOneStoreSupportListener() {
+                    @Override
+                    public void onOneStoreClientFailed(String failedMsg) {
+
+                    }
+
+                    @Override
+                    public void onOneStoreFailed(OneStoreResult result) {
+
+                    }
+
+                    @Override
+                    public void onOneStoreError(String result) {
+
+                    }
+
+                    @Override
+                    public void onOneStoreSuccess(OneStoreResult result) {
+
+                    }
+
+                    @Override
+                    public void onOneStoreConnected() {
+
+                    }
+
+                    @Override
+                    public void onOneStoreDisConnected() {
+
+                    }
+                });
        }
     4、释放资源
     
@@ -1098,7 +1136,7 @@ __注意: 如果之前接入了Google Play支付不可重复配置__
   ![4](https://upload-images.jianshu.io/upload_images/1716569-84f44d0667d0283a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
      2）、在项目的app.build中引用UI的网络包如下所示：
 
-       implementation 'com.github.muyishuangfeng:LTGameSdkUI:1.1.9'
+       implementation 'com.github.muyishuangfeng:LTGameSdkUI:1.2.0'
 
 
 
