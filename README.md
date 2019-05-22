@@ -1,4 +1,11 @@
 # LTGameSdkNote
+
+### 查看sha1（接入的时候不用管）
+ 1、跳转到keystore路径
+ 
+   keytool -v -list -keystore xx（keystore名称）
+
+
 ### 支付流程说明
 
     为了保证支付的安全，sdk采用了Android支付平台（Google Play和OneStore）验证和LT服务器验证两种方式，业务流程图如下：
