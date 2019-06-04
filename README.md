@@ -50,6 +50,7 @@ __2、支付请求参数说明__
 |goodsList|List<String>|是|内购商品集合|
 |productID|String|是|内购商品唯一ID|
 |OnGooglePayResultListener|Interface|是|支付接口回调接口|
+|OnCreateOrderListener|Interface|是|创建订单是否成功|
 
 
 __3、支付结果回调参数说明__
@@ -160,7 +161,7 @@ __3、支付结果回调参数说明__
 
   + 3、在所使用的moule的 app.build中添加项目引用
 
-         implementation 'com.github.muyishuangfeng:LTGameSdkGooglePlay:1.2.0'
+         implementation 'com.github.muyishuangfeng:LTGameSdkGooglePlay:1.2.3'
 
 
 
@@ -210,6 +211,21 @@ __3、支付结果回调参数说明__
                     @Override
                     public void onPlayError(String result) {
                        
+                    }
+                }, new OnCreateOrderListener() {
+                    @Override
+                    public void onOrderSuccess(String result) {
+                       
+                    }
+
+                    @Override
+                    public void onOrderFailed(Throwable ex) {
+                       
+                    }
+
+                    @Override
+                    public void onOrderError(String error) {
+                        
                     }
                 });
           3、支付回调方法
@@ -416,7 +432,7 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
 
 3、在所使用的moule的 app.build中添加项目引用
 
-    implementation 'com.github.muyishuangfeng:LTGameSdkOneStore:1.1.4'
+    implementation 'com.github.muyishuangfeng:LTGameSdkOneStore:1.1.6'
 
 
 
@@ -847,7 +863,7 @@ __手机必须支持OneStore 服务、安装OneStore客户端并且已经登录_
 ![4](https://upload-images.jianshu.io/upload_images/1716569-84f44d0667d0283a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
        2）、在项目的app.build中引用facebook的网络包如下所示
 
-     implementation 'com.github.muyishuangfeng:LTGameSdkFaceBook:1.1.0'
+     implementation 'com.github.muyishuangfeng:LTGameSdkFaceBook:1.1.2'
 
    3）、在项目的清单文件（Manifest）中配置
      
@@ -981,11 +997,11 @@ __注意:facebook_app_id为facebook平台申请的appID，fb_login_protocol_sche
 ![4](https://upload-images.jianshu.io/upload_images/1716569-84f44d0667d0283a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
        2）、在项目的app.build中引用google的网络包如下所示：
 
-        implementation 'com.github.muyishuangfeng:LTGameSdkGoogle:1.1.3'
+        implementation 'com.github.muyishuangfeng:LTGameSdkGoogle:1.1.6'
 
 
 
-__注意: 如果之前接入了Google Play支付不可重复配置__
+
 + 2、参数说明
 
      1）、登录参数
@@ -1143,7 +1159,7 @@ __注意: 如果之前接入了Google Play支付不可重复配置__
   ![4](https://upload-images.jianshu.io/upload_images/1716569-84f44d0667d0283a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
      2）、在项目的app.build中引用UI的网络包如下所示：
 
-       implementation 'com.github.muyishuangfeng:LTGameSdkUI:1.2.1'
+       implementation 'com.github.muyishuangfeng:LTGameSdkUI:1.2.3'
 
 
 
